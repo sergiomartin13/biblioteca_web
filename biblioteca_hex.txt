@@ -1,0 +1,4 @@
+Libro;Libro1;False
+Libro;revista1;False
+Libro;Libro2;False
+Libro;Libro3;False

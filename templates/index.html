@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Hexagonal</title>
+</head>
+<body>
+    <h1>Biblioteca</h1>
+
+    <!-- Mostrar mensajes -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul style="color:red;">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Añadir publicación -->
+    <h2>Añadir publicación</h2>
+    <form action="/añadir" method="post">
+        <input type="text" name="titulo" placeholder="Título" required>
+        <select name="tipo">
+            <option value="Libro">Libro</option>
+            <option value="Revista">Revista</option>
+        </select>
+        <button type="submit">Añadir</button>
+    </form>
+
+    <!-- Prestar publicación -->
+    <h2>Prestar publicación</h2>
+    <form action="/prestar" method="post">
+        <input type="text" name="titulo" placeholder="Título" required>
+        <button type="submit">Prestar</button>
+    </form>
+
+    <!-- Devolver publicación -->
+    <h2>Devolver publicación</h2>
+    <form action="/devolver" method="post">
+        <input type="text" name="titulo" placeholder="Título" required>
+        <button type="submit">Devolver</button>
+    </form>
+
+    <!-- Listado de publicaciones -->
+    <h2>Publicaciones</h2>
+    <ul>
+        {% for tipo, titulo, prestado in publicaciones %}
+        <li>{{ tipo }}: {{ titulo }} - {{ "prestado" if prestado else "disponible" }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
