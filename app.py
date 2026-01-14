@@ -9,10 +9,12 @@ app.secret_key = "clave_super_secreta"  # necesaria para flash
 repositorio = RepositorioFichero("biblioteca_hex.txt")
 biblioteca = Biblioteca(repositorio)
 
+
 @app.route("/", methods=["GET"])
 def index():
     publicaciones = biblioteca.listar()
     return render_template("index.html", publicaciones=publicaciones)
+
 
 @app.route("/añadir", methods=["POST"])
 def añadir():
@@ -29,12 +31,14 @@ def añadir():
         flash(f"Publicación '{titulo}' añadida correctamente")
     return redirect("/")
 
+
 @app.route("/prestar", methods=["POST"])
 def prestar():
     titulo = request.form["titulo"]
     mensaje = biblioteca.prestar(titulo)
     flash(mensaje)
     return redirect("/")
+
 
 @app.route("/devolver", methods=["POST"])
 def devolver():
@@ -43,6 +47,6 @@ def devolver():
     flash(mensaje)
     return redirect("/")
 
+
 if __name__ == "__main__":
     app.run(debug=True)
-
