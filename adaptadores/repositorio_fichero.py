@@ -1,13 +1,16 @@
 from dominio.publicacion import Libro, Revista
 from puertos.repositorio_publicaciones import RepositorioPublicaciones
 
+
 class RepositorioFichero(RepositorioPublicaciones):
     def __init__(self, nombre_fichero):
         self.nombre_fichero = nombre_fichero
 
     def guardar(self, publicacion):
         with open(self.nombre_fichero, "a", encoding="utf-8") as f:
-            f.write(f"{type(publicacion).__name__};{publicacion.titulo};{publicacion.prestado}\n")
+            f.write(
+                f"{type(publicacion).__name__};{publicacion.titulo};{publicacion.prestado}\n"
+            )
 
     def cargar_todas(self):
         publicaciones = []
@@ -23,4 +26,3 @@ class RepositorioFichero(RepositorioPublicaciones):
         except FileNotFoundError:
             pass
         return publicaciones
-
