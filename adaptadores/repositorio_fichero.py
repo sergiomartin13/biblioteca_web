@@ -8,9 +8,11 @@ class RepositorioFichero(RepositorioPublicaciones):
 
     def guardar(self, publicacion):
         with open(self.nombre_fichero, "a", encoding="utf-8") as f:
-            f.write(
-                f"{type(publicacion).__name__};{publicacion.titulo};{publicacion.prestado}\n"
+            linea = (
+                f"{type(publicacion).__name__};{publicacion.titulo};"
+                f"{publicacion.prestado}\n"
             )
+            f.write(linea)
 
     def cargar_todas(self):
         publicaciones = []
@@ -26,3 +28,14 @@ class RepositorioFichero(RepositorioPublicaciones):
         except FileNotFoundError:
             pass
         return publicaciones
+
+    def borrar(self, titulo):
+        publicaciones = self.cargar_todas()
+        publicaciones_filtradas = [
+            p for p in publicaciones
+            if p.titulo.lower() != titulo.lower()
+        ]
+        # Reescribir el archivo con las publicaciones filtradas
+        with open(self.nombre_fichero, "w", encoding="utf-8") as f:
+            for pub in publicaciones_filtradas:
+                f.write(f"{type(pub).__name__};{pub.titulo};{pub.prestado}\n")

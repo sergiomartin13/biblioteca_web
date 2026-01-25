@@ -47,7 +47,12 @@
     <h2>Publicaciones</h2>
     <ul>
         {% for tipo, titulo, prestado in publicaciones %}
-        <li>{{ tipo }}: {{ titulo }} - {{ "prestado" if prestado else "disponible" }}</li>
+        <li>{{ tipo }}: {{ titulo }} - {{ "prestado" if prestado else "disponible" }}
+            <form action="/borrar" method="post" style="display:inline;">
+                <input type="hidden" name="titulo" value="{{ titulo }}">
+                <button type="submit" onclick="return confirm('¿Estás seguro de que quieres borrar esta publicación?')">Borrar</button>
+            </form>
+        </li>
         {% endfor %}
     </ul>
 </body>

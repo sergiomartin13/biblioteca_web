@@ -30,3 +30,13 @@ class Biblioteca:
             (type(p).__name__, p.titulo, p.prestado)
             for p in self.publicaciones
         ]
+
+    def borrar(self, titulo):
+        for i, p in enumerate(self.publicaciones):
+            if p.titulo.lower() == titulo.lower():
+                if p.prestado:
+                    return "No se puede borrar una publicación prestada"
+                del self.publicaciones[i]
+                self.repositorio.borrar(titulo)
+                return f"Publicación '{titulo}' borrada correctamente"
+        return "Publicación no encontrada"

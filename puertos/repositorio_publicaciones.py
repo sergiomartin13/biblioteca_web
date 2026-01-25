@@ -10,3 +10,7 @@ class RepositorioPublicaciones(ABC):
     def cargar_todas(self):
         pass
 
+    @abstractmethod
+    def borrar(self, titulo):
+        pass
+

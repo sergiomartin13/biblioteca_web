@@ -48,5 +48,13 @@ def devolver():
     return redirect("/")
 
 
+@app.route("/borrar", methods=["POST"])
+def borrar():
+    titulo = request.form["titulo"]
+    mensaje = biblioteca.borrar(titulo)
+    flash(mensaje)
+    return redirect("/")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
