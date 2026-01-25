@@ -1,4 +1,3 @@
-import pytest
 import os
 import tempfile
 from adaptadores.repositorio_fichero import RepositorioFichero
@@ -7,7 +6,9 @@ from dominio.publicacion import Libro, Revista
 
 class TestRepositorioFichero:
     def setup_method(self):
-        self.temp_file = tempfile.NamedTemporaryFile(delete=False, mode='w', suffix='.txt')
+        self.temp_file = tempfile.NamedTemporaryFile(
+            delete=False, mode='w', suffix='.txt'
+        )
         self.temp_file.close()
         self.repositorio = RepositorioFichero(self.temp_file.name)
 

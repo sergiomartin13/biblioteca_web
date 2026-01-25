@@ -1,4 +1,3 @@
-import pytest
 from unittest.mock import Mock
 from aplicacion.biblioteca import Biblioteca
 from dominio.publicacion import Libro, Revista
@@ -38,32 +37,48 @@ class TestBiblioteca:
     def test_devolver_existente(self):
         libro = Libro("Libro", True)
         self.biblioteca.publicaciones = [libro]
-        assert self.biblioteca.devolver("Libro") == "Libro devuelto correctamente"
+        assert (
+            self.biblioteca.devolver("Libro") == "Libro devuelto correctamente"
+        )
         assert libro.prestado is False
 
     def test_devolver_no_existente(self):
-        assert self.biblioteca.devolver("No existe") == "Publicación no encontrada"
+        assert (
+            self.biblioteca.devolver("No existe")
+            == "Publicación no encontrada"
+        )
 
     def test_listar(self):
         libro = Libro("Libro", True)
         revista = Revista("Revista")
         self.biblioteca.publicaciones = [libro, revista]
         lista = self.biblioteca.listar()
-        assert lista == [("Libro", "Libro", True), ("Revista", "Revista", False)]
+        assert lista == [
+            ("Libro", "Libro", True),
+            ("Revista", "Revista", False)
+        ]
 
     def test_borrar_existente_disponible(self):
         libro = Libro("Libro")
         self.biblioteca.publicaciones = [libro]
         self.repositorio_mock.borrar.return_value = None
-        assert self.biblioteca.borrar("Libro") == "Publicación 'Libro' borrada correctamente"
+        assert (
+            self.biblioteca.borrar("Libro")
+            == "Publicación 'Libro' borrada correctamente"
+        )
         self.repositorio_mock.borrar.assert_called_once_with("Libro")
         assert len(self.biblioteca.publicaciones) == 0
 
     def test_borrar_existente_prestado(self):
         libro = Libro("Libro", True)
         self.biblioteca.publicaciones = [libro]
-        assert self.biblioteca.borrar("Libro") == "No se puede borrar una publicación prestada"
+        assert (
+            self.biblioteca.borrar("Libro")
+            == "No se puede borrar una publicación prestada"
+        )
         self.repositorio_mock.borrar.assert_not_called()
 
     def test_borrar_no_existente(self):
-        assert self.biblioteca.borrar("No existe") == "Publicación no encontrada"
+        assert (
+            self.biblioteca.borrar("No existe") == "Publicación no encontrada"
+        )
