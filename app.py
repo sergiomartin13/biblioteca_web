@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, flash
 from adaptadores.repositorio_fichero import RepositorioFichero
 from aplicacion.biblioteca import Biblioteca
-from dominio.publicacion import Libro, Revista
+from dominio.publicacion import Libro, Revista 
 
 app = Flask(__name__)
 app.secret_key = "clave_super_secreta"  # necesaria para flash
