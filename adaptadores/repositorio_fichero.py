@@ -42,7 +42,7 @@ class RepositorioFichero(RepositorioPublicaciones):
 
     def borrar(self, titulo):
 
-        #
+        # 
         #Args: título
         #Returns: Nada
         publicaciones = self.cargar_todas()
