@@ -34,11 +34,12 @@ class TestPublicacion:
             pub.prestar()
 
     def test_devolver_abstracto(self):
-         """
+        """
          Confirma que el metodo devolver no sirve en la clase base
          NotImplementedError: Error porque el método no tiene codigo todavía
          """
 
+       
         pub = Publicacion("Test")
         with pytest.raises(NotImplementedError):
             pub.devolver()
